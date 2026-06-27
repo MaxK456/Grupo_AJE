@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJE IT Governance Workspace</title>
+    <style>
+        :root {
+            --bg-color: #f6f8fa;
+            --panel-bg: #ffffff;
+            --border-color: #d0d7de;
+            --text-main: #24292f;
+            --text-muted: #57606a;
+            --primary-blue: #0969da;
+            --success-green: #2da44e;
+            --warning-yellow: #bf8700;
+            --danger-red: #cf222e;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Sidebar centralizada */
+        .sidebar {
+            width: 260px;
+            background-color: var(--panel-bg);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+        }
+
+        .sidebar-header {
+            padding: 0 20px 20px 20px;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: bold;
+            font-size: 1.2em;
+            color: var(--text-main);
+        }
+
+        .nav-item {
+            padding: 12px 20px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background-color: #f3f4f6;
+            color: var(--text-main);
+            border-left: 3px solid var(--primary-blue);
+        }
+
+        /* Contenido Principal */
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .avatar {
+            width: 32px;
+            height: 32px;
+            background-color: var(--primary-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Grid de Widgets */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .widget {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+
+        .widget-title {
+            font-size: 1em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        /* Kanban Simple (GitHub Projects) */
+        .kanban-board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 20px;
+            min-height: 300px;
+        }
+
+        .kanban-col {
+            background-color: var(--bg-color);
+            border-radius: 6px;
+            padding: 10px;
+        }
+
+        .kanban-header {
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-muted);
+        }
+
+        .kanban-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+            border-left: 3px solid var(--primary-blue);
+        }
+
+        .kanban-card.review { border-left-color: var(--warning-yellow); }
+        .kanban-card.done { border-left-color: var(--success-green); }
+
+        /* Status items */
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.9em;
+        }
+        .status-item:last-child { border-bottom: none; }
+
+        .badge {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+        .badge.success { background: #dafbe1; color: var(--success-green); }
+        .badge.danger { background: #ffebe9; color: var(--danger-red); }
+        .badge.warning { background: #fff8c5; color: var(--warning-yellow); }
+
+    </style>
+</head>
+<body>
+
+    <!-- Menú Lateral -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            🏢 Grupo AJE - TI
+        </div>
+        <a href="#" class="nav-item active">📊 Dashboard General</a>
+        <a href="#" class="nav-item">🛡️ Seguridad & Cumplimiento</a>
+    </div>
+
+    <!-- Panel de Control -->
+    <div class="main-content">
+        <div class="header-bar">
+            <h2>Vista de Gobernabilidad Tecnológica</h2>
+            <div class="user-profile">
+                <div class="avatar">LM</div>
+                <span>Luis Morales Campos (Admin/Maintainer)</span>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Widget de Integración Continua (GitHub Actions) -->
+            <div class="widget">
+                <div class="widget-title">⚙️ Automatización (CI/CD Pipeline)</div>
+                <div class="status-item">
+                    <span><strong>SistemaFerreteria</strong> - build: Java CI</span>
+                    <span class="badge success">Pasó</span>
+                </div>
+                <div class="status-item">
+                    <span><strong>AppVentas_AJE</strong> - test: Jest Coverage</span>
+                    <span class="badge danger">Falló</span>
+                </div>
+                <div class="status-item">
+                    <span><strong>CursoIntegrador</strong> - deploy: Producción</span>
+                    <span class="badge success">Pasó</span>
+                </div>
+            </div>
+
+            <!-- Widget de Seguridad (Dependabot / Code Scanning) -->
+            <div class="widget">
+                <div class="widget-title">🛡️ Estado de Seguridad</div>
+                <div class="status-item">
+                    <span>Vulnerabilidades en dependencias (Dependabot)</span>
+                    <span class="badge warning">2 Alertas</span>
+                </div>
+                <div class="status-item">
+                    <span>Secretos Expuestos (Secret Scanning)</span>
+                    <span class="badge success">0 Detectados</span>
+                </div>
+                <div class="status-item">
+                    <span>Análisis Estático (Code Scanning)</span>
+                    <span class="badge success">Limpio</span>
+                </div>
+            </div>
+
+            <!-- Widget de Políticas y Ramas -->
+            <div class="widget">
+                <div class="widget-title">🔒 Protección de Ramas</div>
+                <div class="status-item">
+                    <span>Rama: <strong>main</strong></span>
+                    <span class="badge success">Protegida (Requiere 1 Review)</span>
+                </div>
+                <div class="status-item">
+                    <span>Reglas de Pull Request</span>
+                    <span class="badge success">Activas</span>
+                </div>
+                <div class="status-item">
+                    <span>Control de Acceso</span>
+                    <span class="badge success">Auditado hoy</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tablero Kanban (GitHub Projects) -->
+        <h3 style="margin-top: 30px;">📋 Gestión Ágil (GitHub Projects Integrado)</h3>
+        <div class="kanban-board">
+            
+            <div class="kanban-col">
+                <div class="kanban-header">En Progreso (Develop)</div>
+                <div class="kanban-card">
+                    <strong>#14:</strong> Configurar reglas de .gitignore para entorno Java y binarios.
+                    <div style="color: var(--text-muted); font-size: 0.85em; margin-top: 5px;">Asignado a: Luis Morales</div>
+                </div>
+                <div class="kanban-card">
+                    <strong>#15:</strong> Implementar estructura base para SistemaFerreteria/src/vista/.
+                </div>
+            </div>
+
+            <div class="kanban-col">
+                <div class="kanban-header">Code Review (Pull Requests)</div>
+                <div class="kanban-card review">
+                    <strong>PR #12:</strong> Refactorización de la clase Login.java para validar credenciales encriptadas.
+                    <div style="color: var(--warning-yellow); font-size: 0.85em; margin-top: 5px;">⏳ Esperando aprobación de Senior</div>
+                </div>
+            </div>
+
+            <div class="kanban-col">
+                <div class="kanban-header">Completado (Main / Release)</div>
+                <div class="kanban-card done">
+                    <strong>#10:</strong> "git commit -m 'Version Final'" subido y aprobado para el proyecto integrador.
+                    <div style="color: var(--success-green); font-size: 0.85em; margin-top: 5px;">✔️ Desplegado en producción</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
